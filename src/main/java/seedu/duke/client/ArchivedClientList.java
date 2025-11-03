@@ -14,6 +14,11 @@ public class ArchivedClientList implements ListContainer {
         assert archivedClients != null : "Archived clients list should be initialised properly";
     }
 
+    /**
+     * Archives a client by adding them to the archived list.
+     *
+     * @param client The client to archive.
+     */
     public void archiveClient(Client client) {
         assert client != null : "Client to archive cannot be null";
         int oldSize = archivedClients.size();
@@ -24,6 +29,13 @@ public class ArchivedClientList implements ListContainer {
         System.out.println(client);
     }
 
+    /**
+     * Restores a client from the archived list by removing them at the specified index.
+     *
+     * @param index The index of the client to restore.
+     * @return The restored client.
+     * @throws FinanceProPlusException If the index is invalid.
+     */
     public Client restoreClient(int index) throws FinanceProPlusException {
         if (index < 0 || index >= archivedClients.size()) {
             throw new FinanceProPlusException("Invalid index. Please provide a valid archived client index.");
@@ -80,6 +92,11 @@ public class ArchivedClientList implements ListContainer {
         return archivedClients;
     }
 
+    /**
+     * Converts all archived clients to storage format.
+     *
+     * @return List of strings in storage format.
+     */
     public List<String> toStorageFormat() {
         List<String> lines = new ArrayList<>();
         for (Client client : archivedClients) {
@@ -88,6 +105,13 @@ public class ArchivedClientList implements ListContainer {
         return lines;
     }
 
+    /**
+     * Loads archived clients from storage format.
+     *
+     * @param lines List of strings in storage format.
+     * @param policyList The policy list for client validation.
+     * @throws FinanceProPlusException If any client data is invalid.
+     */
     public void loadFromStorage(List<String> lines, ListContainer policyList) throws FinanceProPlusException {
         if (lines == null || lines.isEmpty()) {
             return;
@@ -98,6 +122,11 @@ public class ArchivedClientList implements ListContainer {
         }
     }
 
+    /**
+     * Converts all archived clients to CSV format.
+     *
+     * @return List of string arrays for CSV export.
+     */
     public List<String[]> toCSVFormat() {
         List<String[]> rows = new ArrayList<>();
         rows.add(new String[]{"Name", "Contact", "NRIC", "Policies"});

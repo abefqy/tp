@@ -9,11 +9,23 @@ import seedu.duke.exception.FinanceProPlusException;
 public class SearchCommand extends Command {
     private String arguments;
 
+    /**
+     * Creates a SearchCommand for searching clients by NRIC.
+     *
+     * @param subtype The type of item to search.
+     * @param arguments The NRIC to search for.
+     */
     public SearchCommand(String subtype, String arguments) {
         this.subtype = subtype;
         this.arguments = arguments;
     }
 
+    /**
+     * Executes the search command by finding a client with the specified NRIC.
+     *
+     * @param lookUpTable The lookup table containing all lists.
+     * @throws FinanceProPlusException If the NRIC is empty or null.
+     */
     @Override
     public void execute(LookUpTable lookUpTable) throws FinanceProPlusException {
         if (arguments == null || arguments.trim().isEmpty()) {

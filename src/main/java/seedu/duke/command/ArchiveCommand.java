@@ -9,12 +9,24 @@ import seedu.duke.exception.FinanceProPlusException;
 public class ArchiveCommand extends Command {
     private String arguments;
 
+    /**
+     * Creates an ArchiveCommand for archiving clients.
+     *
+     * @param subtype The type of item to archive (must be "client").
+     * @param arguments The index of the client to archive.
+     */
     public ArchiveCommand(String subtype, String arguments) {
         assert subtype != null && subtype.equals("client") : "ArchiveCommand only supports client subtype";
         this.subtype = subtype;
         this.arguments = arguments;
     }
 
+    /**
+     * Executes the archive command by moving a client from the main list to the archived list.
+     *
+     * @param lookUpTable The lookup table containing all lists.
+     * @throws FinanceProPlusException If the client index is invalid.
+     */
     @Override
     public void execute(LookUpTable lookUpTable) throws FinanceProPlusException {
         assert lookUpTable != null : "LookUpTable cannot be null";
