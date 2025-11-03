@@ -18,6 +18,13 @@ public class Meeting {
     private String startTime;
     private String endTime;
 
+    /**
+     * Creates a Meeting from the provided arguments string.
+     * Validates required fields and time formats.
+     *
+     * @param arguments The raw string of meeting details.
+     * @throws FinanceProPlusException If required details are missing or formats are invalid.
+     */
     public Meeting(String arguments) throws FinanceProPlusException {
         assert arguments != null && !arguments.trim().isEmpty() : "Arguments for meetings creation cannot be null";
         Map<String, String> detailsMap = parseMeetingDetails(arguments);
@@ -102,6 +109,12 @@ public class Meeting {
         return date;
     }
 
+    /**
+     * Parses meeting details from a string into a map of key-value pairs.
+     *
+     * @param meetingDetails The raw string containing meeting details.
+     * @return A map containing parsed meeting details.
+     */
     public static Map<String, String> parseMeetingDetails(String meetingDetails) {
         assert meetingDetails != null : "Input string for parsing cannot be null";
         Map<String, String> detailsMap = new HashMap<>();
@@ -135,6 +148,11 @@ public class Meeting {
         return "Title: " + title + ", Client: " + client + ", Date: " + date + timeInfo;
     }
 
+    /**
+     * Converts the meeting to a storage format string.
+     *
+     * @return The meeting in storage format.
+     */
     public String toStorageString() {
 
         StringBuilder sb = new StringBuilder();
@@ -148,6 +166,11 @@ public class Meeting {
         return sb.toString();
     }
 
+    /**
+     * Converts the meeting to a CSV row format.
+     *
+     * @return Array of strings representing the meeting data.
+     */
     public String[] toCSVRow() {
 
         return new String[]{title, client, date, startTime, endTime == null ? "" : endTime};

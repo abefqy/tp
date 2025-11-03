@@ -79,6 +79,11 @@ public class MeetingList implements ListContainer {
         return index;
     }
     
+    /**
+     * Converts all meetings to storage format.
+     *
+     * @return List of strings in storage format.
+     */
     public List<String> toStorageFormat() {
         List<String> lines = new ArrayList<>();
         for (Meeting m : meetings) {
@@ -87,12 +92,23 @@ public class MeetingList implements ListContainer {
         return lines;
     }
 
+    /**
+     * Loads meetings from storage format.
+     *
+     * @param lines List of strings in storage format.
+     * @throws FinanceProPlusException If any meeting data is invalid.
+     */
     public void loadFromStorage(List<String> lines) throws FinanceProPlusException {
         for (String line : lines) {
             meetings.add(new Meeting(line));
         }
     }
 
+    /**
+     * Converts all meetings to CSV format.
+     *
+     * @return List of string arrays for CSV export.
+     */
     public List<String[]> toCSVFormat() {
         List<String[]> rows = new ArrayList<>();
         rows.add(new String[]{"Title", "Client", "Date", "Start Time", "End Time"});
@@ -103,6 +119,9 @@ public class MeetingList implements ListContainer {
     }
 
 
+    /**
+     * Lists meetings scheduled in the next 7 days.
+     */
     public void listForecast() {
         assert meetings != null : "Meetings list should not be null";
         LocalDate today = LocalDate.now();

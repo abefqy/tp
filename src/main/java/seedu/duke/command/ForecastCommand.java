@@ -7,10 +7,21 @@ import seedu.duke.meeting.MeetingList;
 public class ForecastCommand extends Command {
     private String arguments;
 
+    /**
+     * Creates a ForecastCommand for displaying upcoming meetings.
+     *
+     * @param subtype The type of forecast (must be "meeting").
+     */
     public ForecastCommand(String subtype) {
         this.arguments = subtype;
     }
 
+    /**
+     * Executes the forecast command by displaying meetings in the next 7 days.
+     *
+     * @param lookUpTable The lookup table containing all lists.
+     * @throws FinanceProPlusException If the subtype is not "meeting".
+     */
     @Override
     public void execute(LookUpTable lookUpTable) throws FinanceProPlusException {
         if (!arguments.equals("meeting")) {
