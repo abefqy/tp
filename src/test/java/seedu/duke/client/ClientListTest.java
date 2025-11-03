@@ -339,6 +339,28 @@ class ClientListTest {
     }
 
     @Nested
+    class SearchClientTests {
+        @BeforeEach
+        void addClientForSearch() throws FinanceProPlusException {
+            clientList.addItem("n/John Doe c/12345678 id/S1234567A", mainPolicyList);
+        }
+
+        @Test
+        void searchClient_existingNric_printsClientFound() throws FinanceProPlusException {
+            clientList.searchClient("S1234567A");
+            String output = outContent.toString();
+            assertTrue(output.contains("Client found:"));
+            assertTrue(output.contains("Name: John Doe"));
+        }
+
+        @Test
+        void searchClient_nonExistingNric_printsNotFound() throws FinanceProPlusException {
+            clientList.searchClient("S9999999Z");
+            assertTrue(outContent.toString().contains("No client found with NRIC: S9999999Z"));
+        }
+    }
+
+    @Nested
     class DeletePolicyForClientTests {
         private final String clientNric = "T1111111A";
         private Client testClient;
